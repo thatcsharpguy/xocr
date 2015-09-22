@@ -67,8 +67,13 @@ namespace Xocr
             var photo = await TakePic();
             if (photo != null)
             {
+                var imageBytes = new byte[photo.Source.Length];
+                photo.Source.Position = 0;
+                photo.Source.Read(imageBytes, 0, (int)photo.Source.Length);
+                photo.Source.Position = 0;
+
                 _takenImage.Source = ImageSource.FromStream(() => photo.Source);
-                var tessResult = await _tesseractApi.SetImage(photo.Source);
+                var tessResult = await _tesseractApi.SetImage(imageBytes);
                 if (tessResult)
                 {
                     _recognizedTextLabel.Text = _tesseractApi.Text;
