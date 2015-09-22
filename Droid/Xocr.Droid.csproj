@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -15,7 +15,7 @@
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AssemblyName>Xocr.Droid</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <TargetFrameworkVersion>v5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +42,18 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="Tesseract, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Tesseract.0.2.8\lib\MonoAndroid10\Tesseract.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Tesseract.Binding.Droid, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Tesseract.0.2.8\lib\MonoAndroid10\Tesseract.Binding.Droid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Tesseract.Droid, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Tesseract.0.2.8\lib\MonoAndroid10\Tesseract.Droid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.Android.Support.v4">
       <HintPath>..\packages\Xamarin.Android.Support.v4.21.0.3.0\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
@@ -68,6 +80,10 @@
     </Reference>
     <Reference Include="XLabs.Core">
       <HintPath>..\packages\XLabs.Core.2.0.5679\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Ioc.TinyIOC.Droid, Version=2.0.5679.29825, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XLabs.IoC.TinyIoC.2.0.5679\lib\MonoAndroid\XLabs.Ioc.TinyIOC.Droid.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="XLabs.Platform.Droid">
       <HintPath>..\packages\XLabs.Platform.2.0.5679\lib\MonoAndroid\XLabs.Platform.Droid.dll</HintPath>
@@ -98,6 +114,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\tessdata\eng.cube.bigrams" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.fold" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.lm" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.nn" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.params" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.size" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.word-freq" />
+    <AndroidAsset Include="Assets\tessdata\eng.tesseract_cube.nn" />
+    <AndroidAsset Include="Assets\tessdata\eng.traineddata" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
