@@ -7,8 +7,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Tesseract;
 using TinyIoC;
+using Tesseract;
+using Tesseract.Droid;
 using XLabs.Ioc;
 using XLabs.Ioc.TinyIOC;
 using XLabs.Platform.Device;
@@ -28,7 +29,7 @@ namespace Xocr.Droid
             container.Register<IDevice>(AndroidDevice.CurrentDevice);
             container.Register<ITesseractApi>((cont, parameters) =>
             {
-                return new Tesseract.Droid.TesseractApi(ApplicationContext, Tesseract.Droid.AssetsDeployment.OncePerInitialization);
+                return new TesseractApi(ApplicationContext, Tesseract.Droid.AssetsDeployment.OncePerInitialization);
             });
             Resolver.SetResolver(new TinyResolver(container));
 
