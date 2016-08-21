@@ -15,7 +15,8 @@ namespace Xocr
     public class HomePage : ContentPage
     {
         private Button _takePictureButton;
-        private Label _recognizedTextLabel;
+		private Label _recognizedTextLabel;
+		private ProgressBar _progressBar;
         private Image _takenImage;
 
         private readonly ITesseractApi _tesseractApi;
@@ -39,10 +40,11 @@ namespace Xocr
         {
             _takePictureButton = new Button
             {
-                Text = "New picture"
+                Text = "New scan"
             };
 
             _recognizedTextLabel = new Label();
+
 
 			_takenImage = new Image() { HeightRequest = 200 };
 
@@ -67,9 +69,13 @@ namespace Xocr
 
         async void TakePictureButton_Clicked(object sender, EventArgs e)
         {
+
+			_takePictureButton.Text = "Working...";
+			_takePictureButton.IsEnabled = false;
+
             if (!_tesseractApi.Initialized)
                 await _tesseractApi.Init("eng");
-
+			
             var photo = await TakePic();
             if (photo != null)
             {
@@ -81,15 +87,18 @@ namespace Xocr
                 photo.Source.Read(imageBytes, 0, (int)photo.Source.Length);
                 photo.Source.Position = 0;
 
-                _takenImage.Source = ImageSource.FromStream(() => photo.Source);
-
                 var tessResult = await _tesseractApi.SetImage(imageBytes);
 
                 if (tessResult)
                 {
+
+					_takenImage.Source = ImageSource.FromStream(() => photo.Source);
                     _recognizedTextLabel.Text = _tesseractApi.Text;
                 }
             }
+
+			_takePictureButton.Text = "New scan";
+			_takePictureButton.IsEnabled = true;
         }
 
         private async Task<MediaFile> TakePic()
